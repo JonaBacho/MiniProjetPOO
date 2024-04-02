@@ -1,10 +1,11 @@
 package core;
 
 import java.util.Date;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class Contact {
+public abstract class Contact {
 	
 	private String code;
 	private String nom;
@@ -102,6 +103,9 @@ public class Contact {
 	        }
 	     return dateChoisie;
 	}
+	
+	// methode d'ajout d'un contact dans la BD
+	public abstract void ajouterEnBD(Connection connect);
 	
 
 }

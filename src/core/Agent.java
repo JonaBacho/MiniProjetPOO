@@ -1,5 +1,6 @@
 package core;
 
+import java.sql.Connection;
 import java.util.Date;
 
 public class Agent extends Contact{
@@ -79,6 +80,11 @@ public class Agent extends Contact{
 		this.occupation = occupation;
 	}
 	
+	
+	// implementation de l'insertion
+	public void ajouterEnBD(Connection connect) {
+		// on enregistre l'objet courant en BD
+	}
 	
 	
 
