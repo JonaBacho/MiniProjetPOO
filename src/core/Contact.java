@@ -105,7 +105,7 @@ public abstract class Contact {
 	}
 	
 	// methode d'ajout d'un contact dans la BD
-	public abstract void ajouterEnBD(Connection connect);
+	public abstract int ajouterEnBD(Connection connect);
 	
 
 }

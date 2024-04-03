@@ -1,6 +1,8 @@
 package core;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 
 public class Agent extends Contact{
@@ -82,8 +84,34 @@ public class Agent extends Contact{
 	
 	
 	// implementation de l'insertion
-	public void ajouterEnBD(Connection connect) {
+	public int ajouterEnBD(Connection connect) {
 		// on enregistre l'objet courant en BD
+		 try {
+	            Statement statement = connect.createStatement();
+
+	            // insertion de données dans la table "Agent"
+	            String insertDataSQL = "INSERT INTO Agents(code, nom, dateDeNaissance, address, email, telNumber, salaire, statut, categorie, "
+	            		+ "indice, occupation) "
+	            		+ "VALUES(" + this.getCode()+ ", " + this.getNom() + ", " + this.dateDeNaissanceFormate() + ", "
+	            		+ this.getAddress() + ", " + this.getEmail() + ", " + this.getTelNumber() + ", " + this.getSalaire() + ", " 
+	            		+ this.getStatut() + ", " + this.getCategorie() + ", " + this.getIndiceDeSalaire() + ", "
+	            		+ this.getOccupation() + ");";
+	            
+	            statement.executeUpdate(insertDataSQL);
+
+	            System.out.println("Agent inseré en BD avec succes");
+	            return 0;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return -1;
+	        }
+	}
+	
+	public String toString() {
+		return "Agent " + this.getCode()+ ", " + this.getNom() + ", " + this.dateDeNaissanceFormate() + ", "
+        		+ this.getAddress() + ", " + this.getEmail() + ", " + this.getTelNumber() + ", " + this.getSalaire() + ", " 
+        		+ this.getStatut() + ", " + this.getCategorie() + ", " + this.getIndiceDeSalaire() + ", "
+        		+ this.getOccupation();
 	}
 	
 	

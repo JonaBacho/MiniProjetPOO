@@ -1,5 +1,8 @@
 package core;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 
 public class Enseignant extends Contact{
@@ -33,5 +36,34 @@ public class Enseignant extends Contact{
 			this.Statut = val;
 		}
 	}
+	
+	// autres methodes
+	// implementation de l'insertion
+	public int ajouterEnBD(Connection connect) {
+		// on enregistre l'objet courant en BD
+		 try {
+	            Statement statement = connect.createStatement();
+
+	            // insertion de données dans la table "Enseignants"
+	            String insertDataSQL = "INSERT INTO Enseignants(code, nom, dateDeNaissance, address, email, telNumber, statut) "
+	            		+ "VALUES(" + this.getCode()+ ", " + this.getNom() + ", " + this.dateDeNaissanceFormate() + ", "
+	            		+ this.getAddress() + ", " + this.getEmail() + ", " + this.getTelNumber() + ", " + this.getStatut() + ");";
+	            
+	            statement.executeUpdate(insertDataSQL);
+
+	            System.out.println("Enseignant inseré en BD avec succes");
+	            return 0;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return -1;
+	        }
+	}
+	
+	public String toString() {
+		return "Etudiant " + this.getCode()+ ", " + this.getNom() + ", " + this.dateDeNaissanceFormate() + ", "
+        		+ this.getAddress() + ", " + this.getEmail() + ", " + this.getTelNumber() + ", " + this.getStatut();
+	}
+		
+		
 
 }
