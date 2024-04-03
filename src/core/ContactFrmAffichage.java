@@ -2,13 +2,10 @@ package core;
 
 import javax.swing.JFrame;
 
-public class ContactFrmAffichage extends JFrame{
+public class ContactFrmAffichage extends TemplateFrm{
 	
 	public ContactFrmAffichage() {
-		this.setTitle("Affichage des contacts");
-		this.setSize(1080,720);
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
+		super("Affichage contact", 1080, 720);
 	}
 	
 

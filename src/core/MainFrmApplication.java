@@ -22,8 +22,7 @@ import javax.swing.JPanel;
 /**
  * @author jonabacho
  */
-public class MainFrmApplication extends JFrame {
-	private JPanel panel;
+public class MainFrmApplication extends TemplateFrm {
 	private JLabel label1;
 	private JButton button1;
 	private JButton button2;
@@ -32,10 +31,8 @@ public class MainFrmApplication extends JFrame {
 	private Repertoire repertoire;
 	
 	public MainFrmApplication() {
-		this.setTitle("Mon application Swing");
-		this.setSize(1080,720);
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
+		super("Mon application swing", 1080, 720);
+		main();
 		initComponents();
 	}
 	
@@ -109,21 +106,16 @@ public class MainFrmApplication extends JFrame {
 
 
 	private void initComponents() {
-		// on definit la panel dans laquel tous va se faire
-		panel=new JPanel();
-		panel.setLayout(null);
-		this.add(panel);
-		panel.setBackground(new Color(200,250,150));
 		
 		
 		label1 = new JLabel("Application de gestion de contacts");
-		label1.setBounds(350,10,800,50);
-		label1.setFont(new Font("Arial",Font.BOLD,18));
+		label1.setBounds(350,10,800,60);
+		label1.setFont(new Font("Arial",Font.BOLD,20));
 		panel.add(label1);
 		
 		
 		button1 = new JButton("Creer des contacts");
-		button1.setBounds(50, 100, 400, 50);
+		button1.setBounds(50, 110, 400, 50);
 		button1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -136,7 +128,7 @@ public class MainFrmApplication extends JFrame {
 		
 		
 		button2 = new JButton("Afficher des contacts");
-		button2.setBounds(650, 100, 400, 50);
+		button2.setBounds(650, 110, 400, 50);
 		button2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
