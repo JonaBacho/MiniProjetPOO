@@ -1,6 +1,7 @@
 package core;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
@@ -15,9 +16,9 @@ public class Agent extends Contact{
 	
 	public Agent() throws AgentStatutException{
 		super();
-		this.setCategorie(" ");
+		this.setCategorie("agent c");
 		this.setIndiceDeSalaire(0);
-		this.setOccupation(" ");
+		this.setOccupation("agent c");
 		this.setSalaire(2000);
 		this.setStatut("PERMANANT");
 	}
@@ -86,25 +87,28 @@ public class Agent extends Contact{
 	// implementation de l'insertion
 	public int ajouterEnBD(Connection connect) {
 		// on enregistre l'objet courant en BD
-		 try {
-	            Statement statement = connect.createStatement();
+		 String insertDataSQL = "INSERT INTO Agents (code, nom, dateDeNaissance, address, email, telNumber, salaire, statut, categorie, indice, occupation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	            // insertion de données dans la table "Agent"
-	            String insertDataSQL = "INSERT INTO Agents(code, nom, dateDeNaissance, address, email, telNumber, salaire, statut, categorie, "
-	            		+ "indice, occupation) "
-	            		+ "VALUES(" + this.getCode()+ ", " + this.getNom() + ", " + this.dateDeNaissanceFormate() + ", "
-	            		+ this.getAddress() + ", " + this.getEmail() + ", " + this.getTelNumber() + ", " + this.getSalaire() + ", " 
-	            		+ this.getStatut() + ", " + this.getCategorie() + ", " + this.getIndiceDeSalaire() + ", "
-	            		+ this.getOccupation() + ");";
-	            
-	            statement.executeUpdate(insertDataSQL);
-
-	            System.out.println("Agent inseré en BD avec succes");
-	            return 0;
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            return -1;
-	        }
+		 try (PreparedStatement statement = connect.prepareStatement(insertDataSQL)) {
+		     statement.setString(1, this.getCode());
+		     statement.setString(2, this.getNom());
+		     statement.setString(3, this.dateDeNaissanceForBD());
+		     statement.setString(4, this.getAddress());
+		     statement.setString(5, this.getEmail());
+		     statement.setString(6, this.getTelNumber());
+		     statement.setDouble(7, this.getSalaire());
+		     statement.setString(8, this.getStatut());
+		     statement.setString(9, this.getCategorie());
+		     statement.setInt(10, this.getIndiceDeSalaire());
+		     statement.setString(11, this.getOccupation());
+		     
+		     statement.executeUpdate();
+		     System.out.println("Agent inseré en BD avec succes");
+		     return 0;
+		 } catch (SQLException e) {
+		     e.printStackTrace();
+		     return -1;
+		 }
 	}
 	
 	public String toString() {

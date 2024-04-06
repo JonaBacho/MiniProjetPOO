@@ -19,13 +19,13 @@ public class MainApplication {
 	        
 	     // Modification d'un contact
 	        Contact nouveauContact1;
-	        nouveauContact1 = new Enseignant("001", "John Doe Jr.", "10/12/1998", "Nouvelle adresse", "nouvellemail@example.com", "999999999", "PERMANANT");
+	        nouveauContact1 = new Etudiant("030", "Bengo.", "10/12/1998", "Nouvelle adresse", "nouvellemail@example.com", "999999999", "INGENIEUR", "3");
 			repertoire.modifierContact(contact1, nouveauContact1);
 
 		} catch (AgentStatutException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}catch (EnseignantStatutException e) {
+		}catch (EtudiantCycleException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -45,6 +45,16 @@ public class MainApplication {
         for (Contact contact : repertoire.getContacts()) {
         	if(contact instanceof Agent) {
             System.out.println(contact.toString());
+        	}
+
+        }
+        
+        MainFrmApplication mainV = new MainFrmApplication();
+        
+        // Ajout en Bd
+        for (Contact contact : repertoire.getContacts()) {
+        	if(contact instanceof Etudiant) {
+        		contact.ajouterEnBD(mainV.main());
         	}
 
         }

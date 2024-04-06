@@ -8,7 +8,7 @@ public class Repertoire {
 	private List<Contact> contacts;
 
     public Repertoire() {
-        contacts = new ArrayList<>();
+        contacts = new ArrayList<Contact>();
     }
 
     // Méthode pour ajouter un contact au répertoire

@@ -92,6 +92,13 @@ public abstract class Contact {
 		return dateFormatee;
 	}
 	
+	// methode de formatage de la date
+	public String dateDeNaissanceForBD() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateFormatee = sdf.format(this.getDateDeNaissance());
+		return dateFormatee;
+	}
+	
 	// methode qui converti une chaine de caractere en Date
 	public Date stringtoDate(String value) {
 		 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

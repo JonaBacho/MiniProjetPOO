@@ -31,36 +31,36 @@ public class ContactFrm extends TemplateFrm{
 	
 	private JButton nextButton;
 	
-	public ContactFrm() {
+	public ContactFrm(Repertoire repertoireCourant) {
 		super("Creer un nouveau contact", 1080, 720);
 		// Initialisation des composants
 		title = new JLabel("Formulaire d'enregistrement d'un contact");
 		title.setBounds(350,10,800,60);
-		title.setFont(new Font("Arial",Font.BOLD,20));
+		title.setFont(titleFont);
 		
         codeLabel = new JLabel("Code:");
         codeLabel.setBounds(50, 100, 200, 60);
-        codeLabel.setFont(new Font("Arial",Font.BOLD,15));
+        codeLabel.setFont(itemFont);
         
         nomLabel = new JLabel("Nom:");
         nomLabel.setBounds(50, 170, 200, 60);
-        nomLabel.setFont(new Font("Arial",Font.BOLD,15));
+        nomLabel.setFont(itemFont);
         
         dateDeNaissanceLabel = new JLabel("Date de Naissance:");
         dateDeNaissanceLabel.setBounds(50, 240, 200, 60);
-        dateDeNaissanceLabel.setFont(new Font("Arial",Font.BOLD,15));
+        dateDeNaissanceLabel.setFont(itemFont);
         
         emailLabel = new JLabel("Email:");
         emailLabel.setBounds(50, 310, 200, 60);
-        emailLabel.setFont(new Font("Arial",Font.BOLD,15));
+        emailLabel.setFont(itemFont);
         
         telNumberLabel = new JLabel("Telephone:");
         telNumberLabel.setBounds(50, 380, 200, 60);
-        telNumberLabel.setFont(new Font("Arial",Font.BOLD,15));
+        telNumberLabel.setFont(itemFont);
         
         adressLabel = new JLabel("Addresse:");
         adressLabel.setBounds(50, 450, 200, 60);
-        adressLabel.setFont(new Font("Arial",Font.BOLD,15));
+        adressLabel.setFont(itemFont);
         
      
         codeField = new JTextField();
@@ -85,20 +85,20 @@ public class ContactFrm extends TemplateFrm{
         // Bouton Radio
         type = new JLabel("Type contact:");
 		type.setBounds(50, 520, 200, 60);
-		type.setFont(new Font("Arial",Font.BOLD,15));
+		type.setFont(itemFont);
 		//type.setForeground(Color.white);
 		
 		typeAgent = new JRadioButton("Agent");
 		typeAgent.setBounds(310, 530, 200, 30);
-		typeAgent.setBackground(new Color(200,250,150));
+		typeAgent.setBackground(color);
 		
 		typeEtudiant = new JRadioButton("Etudiant");
 		typeEtudiant.setBounds(530, 530, 200, 30);
-		typeEtudiant.setBackground(new Color(200,250,150));
+		typeEtudiant.setBackground(color);
 		
 		typeEnseignant = new JRadioButton("Enseignant");
 		typeEnseignant.setBounds(750, 530, 200, 30);
-		typeEnseignant.setBackground(new Color(200,250,150));
+		typeEnseignant.setBackground(color);
 		
 		grouptype = new ButtonGroup();
 		grouptype.add(typeAgent);
@@ -122,15 +122,23 @@ public class ContactFrm extends TemplateFrm{
 				boolean empty = !(code.isBlank()) && !(nom.isBlank()) && !(dateDeNaissance.isBlank()) && !(email.isBlank()) && !(telNumber.isBlank()) 
 						&& !(adress.isBlank());
 				if(typeAgent.isSelected() && empty){
-					// finaliser la creation
-					dispose();	
+					ContactFrmFinal finalform = new ContactFrmFinal(repertoireCourant, "Agent", code, nom, dateDeNaissance, email, 
+							adress, telNumber);
+					finalform.setVisible(true);	
+					dispose();
 				}
 				else if(typeEtudiant.isSelected() && empty) {
 					// finaliser la creation
+					ContactFrmFinal finalform = new ContactFrmFinal(repertoireCourant, "Etudiant", code, nom, dateDeNaissance, email, 
+							adress, telNumber);
+					finalform.setVisible(true);
 					dispose();
 				}
 				else if(typeEnseignant.isSelected() && empty) {
 					// finaliser la creation
+					ContactFrmFinal finalform = new ContactFrmFinal(repertoireCourant, "Enseignant", code, nom, dateDeNaissance, email, 
+							adress, telNumber);
+					finalform.setVisible(true);
 					dispose();
 				}
 				else {
