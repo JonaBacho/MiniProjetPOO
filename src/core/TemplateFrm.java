@@ -8,7 +8,7 @@ import javax.swing.*;
 public class TemplateFrm extends JFrame{
 	
 	protected JPanel panel;
-	protected Color color = new Color(200,250,150);
+	protected Color color = new Color(200,200, 200);
 	protected Font titleFont = new Font("Arial",Font.BOLD,20);
 	protected Font itemFont = new Font("Arial",Font.BOLD,15);
 	
